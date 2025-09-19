@@ -9,6 +9,7 @@ import subprocess
 from pathlib import Path
 
 from asyncinotify import Inotify, Mask
+import django
 from django.conf import settings
 from django.template import Engine, Context
 
@@ -26,6 +27,7 @@ def load_context():
 
 
 settings.configure()
+django.setup()
 
 context = load_context()
 
@@ -80,9 +82,15 @@ async def watch():
         if full_path.resolve() == CONTEXT_FILE.resolve():
             print("Context changed. Reloading and rendering all...")
             context = load_context()
-            render_all_html()
+            try:
+                render_all_html()
+            except Exception as e:
+                print(f"Error while rendering: {e}")
         elif full_path.suffix == ".html" and full_path.parent == TEMPLATE_DIR:
-            render_template(full_path)
+            try:
+                render_template(full_path)
+            except Exception as e:
+                print(f"Error while rendering: {e}")
 
 
 if __name__ == "__main__":

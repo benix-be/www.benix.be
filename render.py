@@ -5,10 +5,13 @@ import json
 import shutil
 from pathlib import Path
 
+import django
 from django.conf import settings
 from django.template import Context, Engine
 
 settings.configure()
+django.setup()
+
 template_root = Path("template")
 output_root = Path("dist")
 engine = Engine(dirs=[str(template_root)])
