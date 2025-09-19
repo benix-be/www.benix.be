@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BeNix - Belgium Nix and Guix User Group</title>
+  <link rel="canonical" href="https://www.benix.be/" />
+  <meta name="description" content="BeNix is the Belgium Nix and Guix User Group. Meetups, talks, and hacking sessions." />
+
+  <link rel="stylesheet" href="./static/style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ===== STICKY HEADER ===== -->
+  <header class="site">
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="#top" id="top" aria-label="BeNix home">
+        <span class="brand-badge" aria-hidden="true"></span>
+        <span>BeNix</span>
+      </a>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#next">Next event</a></li>
+        <li><a href="#past">Past meetups</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero section">
+    <div class="container">
+      <div class="hero-card">
+        <h1>Belgium Nix and Guix User Group</h1>
+        <p class="lead">A community for Nix and Guix users and curious newcomers across Belgium.</p>
+        <div class="hero-cta">
+          <a class="btn secondary" href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Join the Matrix group</a>
+          <a class="btn ghost" href="#past">Browse past meetups</a>
+          <!-- <a class="btn" href="/benix.ics">Add BeNix to your calendar</a> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main id="main">
+    <!-- ===== SUMMARY CARDS ===== -->
+    <section id="next" class="section">
+      <div class="container grid">
+        <article class="card">
+          <h3>When</h3>
+          <p><span class="badge">Next event to be announced soon</span></p>
+          <p class="lead">Meetups are typically early evenings.</p>
+        </article>
+
+        <article class="card">
+          <h3>Where</h3>
+          <p><span class="badge">Location to be announced</span></p>
+          <p class="lead">We have previously met at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a> and <a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>,
+          and are planning meetings in Ghent, Nivelles and other cities.
+          </p>
+        </article>
+
+        <article class="card" id="about">
+          <h3>What</h3>
+          <p>Open to all skill levels, we are sharing tips, working together on projects and having technical
+            and community discussions. Bring a laptop.</p>
+        </article>
+
+        <article class="card">
+          <h3>How</h3>
+          <p>Join the Matrix group to stay updated and connect with members.</p>
+          <p><strong>Matrix address:</strong> <code>{{ matrix_room }}</code></p>
+          <p><a class="btn secondary" href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Open Matrix</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== DETAILS PANEL ===== -->
+    <section class="section">
+      <div class="container panel">
+        <h2 style="margin:0 0 6px; font-size:1.3rem; color:var(--muted);">About BeNix</h2>
+        <p style="margin:0">
+          Formerly active as BruNix in Brussels. We are expanding to a Belgium wide community with periodic local meetups and informal hacking sessions.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== TIMELINE ===== -->
+    <section id="past" class="section">
+      <div class="container">
+        <h2 style="margin:0 0 14px; font-size:1.6rem;">Past meetups <span style="color:var(--muted); font-size:1rem;">(as BruNix in Brussels)</span></h2>
+        <ul class="timeline">
+          <li class="tl-item">#10 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, March 28, 2025</li>
+          <li class="tl-item">#9 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, January 17th, 2024</li>
+          <li class="tl-item">#8 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, December 9th, 2024</li>
+          <li class="tl-item">#7 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, September 9th, 2024</li>
+          <li class="tl-item">#6 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, August 12th, 2024</li>
+          <li class="tl-item">#5 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, July 8th, 2024</li>
+          <li class="tl-item">#4 at <a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>, June 10th, 2024</li>
+          <li class="tl-item">#3 at <a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>, May 13th, 2024</li>
+          <li class="tl-item">#2 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, April 8th, 2024</li>
+          <li class="tl-item">#1 at <a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>, March 11th, 2024</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer id="contact">
+    <div class="container foot-grid">
+      <div class="foot-card">
+        <strong>Community</strong>
+        <p style="margin:.4rem 0 0">Matrix: <code>{{ matrix_room }}</code></p>
+        <p style="margin:.2rem 0 0"><a href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Join the Matrix group</a></p>
+      </div>
+      <div class="foot-card">
+        <strong>Venues</strong>
+        <p style="margin:.4rem 0 0"><a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a></p>
+        <p style="margin:.2rem 0 0"><a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a></p>
+      </div>
+      <div class="foot-card">
+        <strong>Website</strong>
+        <p style="margin:.4rem 0 0"><a href="https://www.benix.be/">www.benix.be</a></p>
+        <p style="margin:.2rem 0 0">© 2025 BeNix</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <a class="btn top" href="#top" aria-label="Back to top">Top</a>
+</body>
+</html>

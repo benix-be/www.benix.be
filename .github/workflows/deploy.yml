@@ -39,12 +39,14 @@ jobs:
         uses: cachix/install-nix-action@v27
         with:
           nix_path: nixpkgs=channel:${{ matrix.os == 'macos-latest' && 'nixpkgs-25.05-darwin' || 'nixos-25.05' }}
-        
+
+      - name: Build static website
+        run: nix-build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'
+          path: 'result'
 
       - name: Deploy to GitHub Pages
         id: deployment
