@@ -91,16 +91,9 @@
       <div class="container">
         <h2 style="margin:0 0 14px; font-size:1.6rem;">Past meetups <span style="color:var(--muted); font-size:1rem;">(as BruNix in Brussels)</span></h2>
         <ul class="timeline">
-          <li class="tl-item">#10 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, March 28, 2025</li>
-          <li class="tl-item">#9 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, January 17th, 2024</li>
-          <li class="tl-item">#8 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, December 9th, 2024</li>
-          <li class="tl-item">#7 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, September 9th, 2024</li>
-          <li class="tl-item">#6 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, August 12th, 2024</li>
-          <li class="tl-item">#5 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, July 8th, 2024</li>
-          <li class="tl-item">#4 at <a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>, June 10th, 2024</li>
-          <li class="tl-item">#3 at <a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>, May 13th, 2024</li>
-          <li class="tl-item">#2 at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a>, April 8th, 2024</li>
-          <li class="tl-item">#1 at <a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>, March 11th, 2024</li>
+          {% for meetup in past_meetups %}
+          <li class="tl-item">#{{ meetup.number }} at <a href="{{ meetup.venue_url }}" target="_blank" rel="noopener">{{ meetup.venue_name }}</a>, {{ meetup.date }}</li>
+          {% endfor %}
         </ul>
       </div>
     </section>
