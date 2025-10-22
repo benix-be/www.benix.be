@@ -9,6 +9,8 @@ import django
 from django.conf import settings
 from django.template import Context, Engine
 
+from calendar_export import export_calendar
+
 settings.configure()
 django.setup()
 
@@ -18,6 +20,9 @@ engine = Engine(dirs=[str(template_root)])
 
 with open("context.json") as f:
     context = json.load(f)
+
+output_root.mkdir(parents=True, exist_ok=True)
+export_calendar(context, output_root / "benix.ics")
 
 for src_path in template_root.rglob("*"):
     rel_path = src_path.relative_to(template_root)

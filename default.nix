@@ -14,6 +14,7 @@ pkgs.stdenv.mkDerivation {
   buildInputs = [
     pkgs.python3
     pkgs.python3Packages.django
+    pkgs.python3Packages.ics
   ];
 
   installPhase = ''

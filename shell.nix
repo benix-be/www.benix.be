@@ -6,6 +6,7 @@ pkgs.mkShell {
   buildInputs = with pkgs; [
     python3
     python3Packages.django
+    python3Packages.ics
     python3Packages.asyncinotify
     nix
   ];

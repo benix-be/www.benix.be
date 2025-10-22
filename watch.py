@@ -13,6 +13,8 @@ import django
 from django.conf import settings
 from django.template import Engine, Context
 
+from calendar_export import export_calendar
+
 TEMPLATE_DIR = Path("template")
 OUTPUT_DIR = Path("dist")
 CONTEXT_FILE = Path("context.nix")
@@ -64,6 +66,12 @@ def copy_static_dirs():
             print(f"Copied: {src} → {dst}")
 
 
+def write_calendar(current_context):
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    export_calendar(current_context, OUTPUT_DIR / "benix.ics")
+    print(f"Wrote calendar: {OUTPUT_DIR / 'benix.ics'}")
+
+
 async def watch():
     global context
     inotify = Inotify()
@@ -83,6 +91,7 @@ async def watch():
             print("Context changed. Reloading and rendering all...")
             context = load_context()
             try:
+                write_calendar(context)
                 render_all_html()
             except Exception as e:
                 print(f"Error while rendering: {e}")
@@ -95,5 +104,6 @@ async def watch():
 
 if __name__ == "__main__":
     render_all_html()
+    write_calendar(context)
     copy_static_dirs()
     asyncio.run(watch())
