@@ -67,8 +67,12 @@
             <div class="meetup-chips">
               <span class="chip chip-location">{{ meetup.city }}</span>
               <span class="chip chip-time">
-                {% if meetup.time %}
+                {% if meetup.time and meetup.end_time %}
+                {{ meetup.time }}&nbsp;–&nbsp;{{ meetup.end_time }}
+                {% elif meetup.time %}
                 Starts at {{ meetup.time }}
+                {% elif meetup.end_time %}
+                Ends by {{ meetup.end_time }}
                 {% else %}
                 Time to be confirmed
                 {% endif %}

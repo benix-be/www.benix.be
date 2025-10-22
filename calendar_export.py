@@ -18,7 +18,7 @@ except Exception:  # pragma: no cover - tzdata may be missing
     LOCAL_TIMEZONE = None
 
 ORDINAL_SUFFIX = re.compile(r"(\d{1,2})(st|nd|rd|th)")
-ICS_DURATION = timedelta(hours=3)
+DEFAULT_DURATION = timedelta(hours=4)
 
 
 class CalendarExportError(Exception):
@@ -60,12 +60,21 @@ def _parse_time(value: str | None) -> time_ | None:
         raise CalendarExportError(f"Failed to parse time {value!r}") from exc
 
 
+def _combine_with_timezone(meetup_date: date, t: time_) -> datetime:
+    dt = datetime.combine(meetup_date, t)
+    if LOCAL_TIMEZONE:
+        dt = dt.replace(tzinfo=LOCAL_TIMEZONE)
+    return dt
+
+
 def _meetup_to_event(meetup: Mapping[str, Any]) -> Event:
     if "date" not in meetup:
         raise CalendarExportError("Meetup entry is missing a date field")
 
     meetup_date = _parse_date(str(meetup["date"]))
     meetup_time = _parse_time(meetup.get("time"))
+    raw_end_time = meetup.get("end_time")
+    meetup_end_time = _parse_time(raw_end_time)
     city = str(meetup.get("city") or "").strip()
     details = str(meetup.get("details") or "").strip()
 
@@ -73,11 +82,15 @@ def _meetup_to_event(meetup: Mapping[str, Any]) -> Event:
     event = Event(name=f"BeNix meetup{title_suffix}")
 
     if meetup_time:
-        begin = datetime.combine(meetup_date, meetup_time)
-        if LOCAL_TIMEZONE:
-            begin = begin.replace(tzinfo=LOCAL_TIMEZONE)
+        begin = _combine_with_timezone(meetup_date, meetup_time)
         event.begin = begin
-        event.duration = ICS_DURATION
+        if meetup_end_time:
+            end = _combine_with_timezone(meetup_date, meetup_end_time)
+            if end <= begin:
+                end += timedelta(days=1)
+            event.end = end
+        else:
+            event.duration = DEFAULT_DURATION
     else:
         event.begin = meetup_date
         event.make_all_day()
@@ -88,6 +101,8 @@ def _meetup_to_event(meetup: Mapping[str, Any]) -> Event:
     description_lines = []
     if details:
         description_lines.append(details)
+    if raw_end_time:
+        description_lines.append(f"Planned end time: {raw_end_time}.")
     if not meetup_time:
         description_lines.append("Exact start time to be confirmed.")
 

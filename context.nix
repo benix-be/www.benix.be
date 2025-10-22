@@ -5,12 +5,14 @@
     {
       date = "Friday November 7th, 2025";
       time = "18:00";
+      end_time = "22:00";
       city = "Nivelles";
       details = "Location to be confirmed.";
     }
     {
       date = "Friday December 5th, 2025";
-      time = null;
+      time = "18:00";
+      end_time = "22:00";
       city = "Brussels city centre";
       details = "Venue details coming soon.";
     }
