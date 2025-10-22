@@ -1,21 +1,22 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BeNix - Belgium Nix and Guix User Group</title>
   <link rel="canonical" href="https://www.benix.be/" />
-  <meta name="description" content="BeNix is the Belgium Nix and Guix User Group. Meetups, talks, and hacking sessions." />
+  <meta name="description"
+    content="BeNix is the Belgium Nix and Guix User Group. Meetups, talks, and hacking sessions." />
 
   <link rel="stylesheet" href="./static/style.css" />
 </head>
-<body>
-  <a class="skip" href="#main">Skip to content</a>
 
+<body>
   <!-- ===== STICKY HEADER ===== -->
   <header class="site">
     <div class="container nav" role="navigation" aria-label="Primary">
-      <a class="brand" href="#top" id="top" aria-label="BeNix home">
+      <a class="brand" href="#top" aria-label="BeNix home">
         <span class="brand-badge" aria-hidden="true"></span>
         <span>BeNix</span>
       </a>
@@ -29,13 +30,14 @@
   </header>
 
   <!-- ===== HERO ===== -->
-  <section class="hero section">
+  <section class="hero section" id="top">
     <div class="container">
       <div class="hero-card">
         <h1>Belgium Nix and Guix User Group</h1>
         <p class="lead">A community for Nix and Guix users and curious newcomers across Belgium.</p>
         <div class="hero-cta">
-          <a class="btn secondary" href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Join the Matrix group</a>
+          <a class="btn secondary" href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Join the
+            Matrix group</a>
           <a class="btn ghost" href="#past">Browse past meetups</a>
           <!-- <a class="btn" href="/benix.ics">Add BeNix to your calendar</a> -->
         </div>
@@ -44,34 +46,79 @@
   </section>
 
   <main id="main">
+    <!-- ===== UPCOMING MEETUPS ===== -->
+    <section id="next" class="section next-meetups">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Upcoming meetups</h2>
+          <p class="lead">Grab a spot at the next gathering or follow along to hear when details are confirmed.</p>
+        </div>
+
+        {% if next_meetups %}
+        <div class="next-grid">
+          {% for meetup in next_meetups %}
+          <article class="meetup-card{% if forloop.first %} is-featured{% endif %}">
+            <header class="meetup-header">
+              <span class="meetup-kicker">{% if forloop.first %}Next meetup{% else %}Coming up{% endif %}</span>
+              <h3 class="meetup-city">{{ meetup.city }}</h3>
+              <p class="meetup-date">{{ meetup.date }}</p>
+            </header>
+            <div class="meetup-chips">
+              <span class="chip chip-location">{{ meetup.city }}</span>
+              <span class="chip chip-time">
+                {% if meetup.time %}
+                Starts at {{ meetup.time }}
+                {% else %}
+                Time to be confirmed
+                {% endif %}
+              </span>
+            </div>
+            {% if meetup.details %}
+            <p class="meetup-status"><span>Status</span>{{ meetup.details }}</p>
+            {% endif %}
+          </article>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="lead">We are lining up the next meetup dates. Join the Matrix group to stay informed.</p>
+        {% endif %}
+
+        <div class="section-cta">
+          <a class="btn secondary" href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Get
+            updates on Matrix</a>
+        </div>
+      </div>
+    </section>
+
     <!-- ===== SUMMARY CARDS ===== -->
-    <section id="next" class="section">
+    <section class="section">
       <div class="container grid">
-        <article class="card">
-          <h3>When</h3>
-          <p><span class="badge">Next event to be announced soon</span></p>
-          <p class="lead">Meetups are typically early evenings.</p>
-        </article>
-
-        <article class="card">
-          <h3>Where</h3>
-          <p><span class="badge">Location to be announced</span></p>
-          <p class="lead">We have previously met at <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a> and <a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>,
-          and are planning meetings in Ghent, Nivelles and other cities.
-          </p>
-        </article>
-
         <article class="card" id="about">
-          <h3>What</h3>
-          <p>Open to all skill levels, we are sharing tips, working together on projects and having technical
+          <h3>What we do</h3>
+          <p>Open to all skill levels, we share tips, work on projects together and have technical
             and community discussions. Bring a laptop.</p>
         </article>
 
         <article class="card">
-          <h3>How</h3>
+          <h3>Where we meet</h3>
+          <p>We rotate between venues such as <a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a> and
+            <a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>,
+            with pop-up sessions planned in Nivelles, Ghent and other cities.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Format</h3>
+          <p>Expect short demos, lightning talks and informal hacking sessions. We typically start early evening and
+            wrap up when the conversation winds down.</p>
+        </article>
+
+        <article class="card">
+          <h3>Stay connected</h3>
           <p>Join the Matrix group to stay updated and connect with members.</p>
           <p><strong>Matrix address:</strong> <code>{{ matrix_room }}</code></p>
-          <p><a class="btn secondary" href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Open Matrix</a></p>
+          <p><a class="btn ghost" href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Open
+              Matrix</a></p>
         </article>
       </div>
     </section>
@@ -81,7 +128,8 @@
       <div class="container panel">
         <h2 style="margin:0 0 6px; font-size:1.3rem; color:var(--muted);">About BeNix</h2>
         <p style="margin:0">
-          Formerly active as BruNix in Brussels. We are expanding to a Belgium wide community with periodic local meetups and informal hacking sessions.
+          Formerly active as BruNix in Brussels. We are expanding to a Belgium wide community with periodic local
+          meetups and informal hacking sessions.
         </p>
       </div>
     </section>
@@ -89,10 +137,13 @@
     <!-- ===== TIMELINE ===== -->
     <section id="past" class="section">
       <div class="container">
-        <h2 style="margin:0 0 14px; font-size:1.6rem;">Past meetups <span style="color:var(--muted); font-size:1rem;">(as BruNix in Brussels)</span></h2>
+        <h2 style="margin:0 0 14px; font-size:1.6rem;">Past meetups <span
+            style="color:var(--muted); font-size:1rem;">(as BruNix in Brussels)</span></h2>
         <ul class="timeline">
           {% for meetup in past_meetups %}
-          <li class="tl-item">#{{ meetup.number }} at <a href="{{ meetup.venue_url }}" target="_blank" rel="noopener">{{ meetup.venue_name }}</a>, {{ meetup.date }}</li>
+          <li class="tl-item">#{{ meetup.number }} at <a href="{{ meetup.venue_url }}" target="_blank" rel="noopener">
+              {{ meetup.venue_name }}</a>, {{ meetup.date }}
+          </li>
           {% endfor %}
         </ul>
       </div>
@@ -105,12 +156,14 @@
       <div class="foot-card">
         <strong>Community</strong>
         <p style="margin:.4rem 0 0">Matrix: <code>{{ matrix_room }}</code></p>
-        <p style="margin:.2rem 0 0"><a href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Join the Matrix group</a></p>
+        <p style="margin:.2rem 0 0"><a href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Join
+            the Matrix group</a></p>
       </div>
       <div class="foot-card">
         <strong>Venues</strong>
         <p style="margin:.4rem 0 0"><a href="https://hsbxl.be/" target="_blank" rel="noopener">HSBXL</a></p>
-        <p style="margin:.2rem 0 0"><a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a></p>
+        <p style="margin:.2rem 0 0"><a href="https://www.becentral.org/" target="_blank" rel="noopener">BeCentral</a>
+        </p>
       </div>
       <div class="foot-card">
         <strong>Website</strong>
@@ -123,4 +176,5 @@
   <!-- Back to top -->
   <a class="btn top" href="#top" aria-label="Back to top">Top</a>
 </body>
+
 </html>

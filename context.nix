@@ -1,6 +1,21 @@
 {
   matrix_room = "#brunix:matrix.org";
 
+  next_meetups = [
+    {
+      date = "Friday November 7th, 2025";
+      time = "18:00";
+      city = "Nivelles";
+      details = "Location to be confirmed.";
+    }
+    {
+      date = "Friday December 5th, 2025";
+      time = null;
+      city = "Brussels city centre";
+      details = "Venue details coming soon.";
+    }
+  ];
+
   past_meetups = [
     {
       number = 10;
