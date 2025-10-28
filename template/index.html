@@ -61,57 +61,73 @@
         <div class="next-grid">
           {% for meetup in next_meetups %}
           <article class="meetup-card{% if forloop.first %} is-featured{% endif %}">
-            <header class="meetup-header">
-              <span class="meetup-kicker">{% if forloop.first %}Next meetup{% else %}Coming up{% endif %}</span>
+            <header class="meetup-card-header">
+              <div class="meetup-card-top">
+                <span class="meetup-card-kicker">{% if forloop.first %}Next meetup{% else %}Coming up{% endif %}</span>
+                {% if meetup.time and meetup.venue and meetup.venue.address %}
+                <span class="meetup-card-status is-confirmed">Details confirmed</span>
+                {% else %}
+                <span class="meetup-card-status is-pending">Details pending</span>
+                {% endif %}
+              </div>
               <h3 class="meetup-city">{{ meetup.city }}</h3>
               <p class="meetup-date">{{ meetup.date }}</p>
             </header>
-            <div class="meetup-chips">
-              <span class="chip chip-location">{{ meetup.city }}</span>
-              <span class="chip chip-time">
-                {% if meetup.time and meetup.end_time %}
-                {{ meetup.time }}&nbsp;–&nbsp;{{ meetup.end_time }}
-                {% elif meetup.time %}
-                Starts at {{ meetup.time }}
-                {% elif meetup.end_time %}
-                Ends by {{ meetup.end_time }}
-                {% else %}
-                Time to be confirmed
+            <div class="meetup-card-body">
+              <dl class="meetup-meta">
+                <div class="meta-item{% if not meetup.time and not meetup.end_time %} is-pending{% endif %}">
+                  <dt>Time</dt>
+                  <dd>
+                    {% if meetup.time and meetup.end_time %}
+                    {{ meetup.time }}&nbsp;–&nbsp;{{ meetup.end_time }}
+                    {% elif meetup.time %}
+                    Starts at {{ meetup.time }}
+                    {% elif meetup.end_time %}
+                    Ends by {{ meetup.end_time }}
+                    {% else %}
+                    To be confirmed
+                    {% endif %}
+                  </dd>
+                </div>
+                <div class="meta-item{% if not meetup.venue or not meetup.venue.address %} is-pending{% endif %}">
+                  <dt>Venue</dt>
+                  <dd>
+                    {% if meetup.venue and meetup.venue.address %}
+                    {{ meetup.venue.address }}
+                    {% else %}
+                    To be confirmed
+                    {% endif %}
+                  </dd>
+                </div>
+                {% if meetup.food %}
+                <div class="meta-item">
+                  <dt>Food</dt>
+                  <dd>{{ meetup.food }}</dd>
+                </div>
                 {% endif %}
-              </span>
-              {% if meetup.food %}
-              <span class="chip chip-food">{{ meetup.food }}</span>
+              </dl>
+              {% if meetup.program %}
+              <div class="meetup-note">
+                <span>Program</span>
+                <p>{{ meetup.program }}</p>
+              </div>
               {% endif %}
             </div>
-            {% if meetup.venue %}
-            <div class="meetup-venue">
-              {% if meetup.venue.address %}
-              <p class="meetup-status"><span>Venue</span>{{ meetup.venue.address }}</p>
+            {% if meetup.discussion or meetup.venue.url or meetup.venue.geolocation %}
+            <div class="meetup-actions">
+              {% if meetup.venue and meetup.venue.url %}
+              <a class="meetup-action" href="{{ meetup.venue.url }}" target="_blank" rel="noopener">Venue website</a>
               {% endif %}
-              {% if meetup.venue.url or meetup.venue.geolocation %}
-              <p class="meetup-links">
-                {% if meetup.venue.url %}
-                <a href="{{ meetup.venue.url }}" target="_blank" rel="noopener">Venue website</a>
-                {% endif %}
-                {% if meetup.venue.url and meetup.venue.geolocation %}
-                ·
-                {% endif %}
-                {% if meetup.venue.geolocation %}
-                <a href="https://www.openstreetmap.org/?mlat={{ meetup.venue.geolocation.latitude }}&mlon={{ meetup.venue.geolocation.longitude }}#map=18/{{ meetup.venue.geolocation.latitude }}/{{ meetup.venue.geolocation.longitude }}"
-                  target="_blank" rel="noopener">View on map</a>
-                {% endif %}
-              </p>
+              {% if meetup.venue and meetup.venue.geolocation %}
+              <a class="meetup-action"
+                href="https://www.openstreetmap.org/?mlat={{ meetup.venue.geolocation.latitude }}&mlon={{ meetup.venue.geolocation.longitude }}#map=18/{{ meetup.venue.geolocation.latitude }}/{{ meetup.venue.geolocation.longitude }}"
+                target="_blank" rel="noopener">View on map</a>
+              {% endif %}
+              {% if meetup.discussion %}
+              <a class="meetup-action" href="{{ meetup.discussion }}" target="_blank" rel="noopener">Community
+                discussion</a>
               {% endif %}
             </div>
-            {% endif %}
-            {% if meetup.program %}
-            <p class="meetup-status"><span>Program</span>{{ meetup.program }}</p>
-            {% endif %}
-            {% if meetup.discussion %}
-            <p class="meetup-status">
-              <span>Discussions</span>
-              <a href="{{ meetup.discussion }}" target="_blank" rel="noopener">Topic on NixOS community forum</a>
-            </p>
             {% endif %}
           </article>
           {% endfor %}
