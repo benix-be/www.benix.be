@@ -1,3 +1,4 @@
+scu
 <!doctype html>
 <html lang="en">
 
@@ -77,9 +78,39 @@
                 Time to be confirmed
                 {% endif %}
               </span>
+              {% if meetup.food %}
+              <span class="chip chip-food">{{ meetup.food }}</span>
+              {% endif %}
             </div>
-            {% if meetup.details %}
-            <p class="meetup-status"><span>Status</span>{{ meetup.details }}</p>
+            {% if meetup.venue %}
+            <div class="meetup-venue">
+              {% if meetup.venue.address %}
+              <p class="meetup-status"><span>Venue</span>{{ meetup.venue.address }}</p>
+              {% endif %}
+              {% if meetup.venue.url or meetup.venue.geolocation %}
+              <p class="meetup-links">
+                {% if meetup.venue.url %}
+                <a href="{{ meetup.venue.url }}" target="_blank" rel="noopener">Venue website</a>
+                {% endif %}
+                {% if meetup.venue.url and meetup.venue.geolocation %}
+                ·
+                {% endif %}
+                {% if meetup.venue.geolocation %}
+                <a href="https://www.openstreetmap.org/?mlat={{ meetup.venue.geolocation.latitude }}&mlon={{ meetup.venue.geolocation.longitude }}#map=18/{{ meetup.venue.geolocation.latitude }}/{{ meetup.venue.geolocation.longitude }}"
+                  target="_blank" rel="noopener">View on map</a>
+                {% endif %}
+              </p>
+              {% endif %}
+            </div>
+            {% endif %}
+            {% if meetup.program %}
+            <p class="meetup-status"><span>Program</span>{{ meetup.program }}</p>
+            {% endif %}
+            {% if meetup.discussion %}
+            <p class="meetup-status">
+              <span>Discussions</span>
+              <a href="{{ meetup.discussion }}" target="_blank" rel="noopener">Topic on NixOS community forum</a>
+            </p>
             {% endif %}
           </article>
           {% endfor %}
@@ -87,13 +118,6 @@
         {% else %}
         <p class="lead">We are lining up the next meetup dates. Join the Matrix group to stay informed.</p>
         {% endif %}
-
-        <div class="section-cta">
-          <a class="btn secondary" href="https://matrix.to/#/{{ matrix_room }}" target="_blank" rel="noopener">Get
-            updates on Matrix</a>
-          <a class="btn ghost" href="./benix.ics" download>Add the calendar</a>
-        </div>
-      </div>
     </section>
 
     <!-- ===== SUMMARY CARDS ===== -->

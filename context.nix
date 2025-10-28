@@ -5,16 +5,27 @@
     {
       date = "Friday November 7th, 2025";
       time = "18:00";
-      end_time = "22:00";
+      end_time = "21:30";
       city = "Nivelles";
-      details = "Location to be confirmed.";
+      venue = {
+        address = "Rue du Deversoir 4, 1400 Nivelles, Belgium";
+        url = "https://le-phare.be/le-puits/";
+        geolocation = {
+          latitude = 50.5998488;
+          longitude = 4.3282182;
+        };
+      };
+      program = "Presentations, drinks, and open discussions.";
+      food = "Pizza";
+      discussion = "https://discourse.nixos.org/t/nix-meetup-nivelles-belgium-2025-11-7/71431";
     }
     {
       date = "Friday December 5th, 2025";
       time = "18:00";
       end_time = "22:00";
       city = "Brussels city centre";
-      details = "Venue details coming soon.";
+      program = "Dinner, presentations, and open discussions.";
+      food = null;
     }
   ];
 

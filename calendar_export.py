@@ -67,6 +67,12 @@ def _combine_with_timezone(meetup_date: date, t: time_) -> datetime:
     return dt
 
 
+def _clean(value: Any) -> str:
+    if value is None:
+        return ""
+    return str(value).strip()
+
+
 def _meetup_to_event(meetup: Mapping[str, Any]) -> Event:
     if "date" not in meetup:
         raise CalendarExportError("Meetup entry is missing a date field")
@@ -76,7 +82,16 @@ def _meetup_to_event(meetup: Mapping[str, Any]) -> Event:
     raw_end_time = meetup.get("end_time")
     meetup_end_time = _parse_time(raw_end_time)
     city = str(meetup.get("city") or "").strip()
-    details = str(meetup.get("details") or "").strip()
+    program = _clean(meetup.get("program"))
+    food = _clean(meetup.get("food"))
+    discussion = _clean(meetup.get("discussion"))
+
+    venue_info = meetup.get("venue") or {}
+    venue_address = _clean(venue_info.get("address"))
+    venue_url = _clean(venue_info.get("url"))
+    geolocation = venue_info.get("geolocation") or {}
+    latitude = geolocation.get("latitude")
+    longitude = geolocation.get("longitude")
 
     title_suffix = f" – {city}" if city else ""
     event = Event(name=f"BeNix meetup{title_suffix}")
@@ -95,21 +110,44 @@ def _meetup_to_event(meetup: Mapping[str, Any]) -> Event:
         event.begin = meetup_date
         event.make_all_day()
 
-    if city:
+    if venue_address:
+        event.location = venue_address
+    elif city:
         event.location = city
 
     description_lines = []
-    if details:
-        description_lines.append(details)
+    if program:
+        description_lines.append(f"Program: {program}")
+    if food:
+        description_lines.append(f"Food: {food}")
+    if venue_address and city and city not in venue_address:
+        description_lines.append(f"City: {city}")
+    if venue_url:
+        description_lines.append(f"Venue website: {venue_url}")
+    if latitude is not None and longitude is not None:
+        lat_str = _clean(latitude)
+        lon_str = _clean(longitude)
+        if lat_str and lon_str:
+            description_lines.append(
+                "Map: "
+                f"https://www.openstreetmap.org/?mlat={lat_str}&mlon={lon_str}#map=18/{lat_str}/{lon_str}"
+            )
     if raw_end_time:
         description_lines.append(f"Planned end time: {raw_end_time}.")
     if not meetup_time:
         description_lines.append("Exact start time to be confirmed.")
+    if discussion:
+        description_lines.append(f"Discussion: {discussion}")
 
     if description_lines:
         event.description = "\n".join(description_lines)
 
-    event.url = "https://www.benix.be/"
+    if discussion:
+        event.url = discussion
+    elif venue_url:
+        event.url = venue_url
+    else:
+        event.url = "https://www.benix.be/"
     return event
 
 
