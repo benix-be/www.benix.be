@@ -1,20 +1,25 @@
 # Builds the static website using the Nix defined context
-{
-  pkgs ? import <nixpkgs> { },
-}:
+{ pkgs ? null }:
 
 let
+  system = builtins.currentSystem;
+  resolvedPkgs =
+    if pkgs != null then pkgs
+    else if builtins ? getFlake then
+      (builtins.getFlake "nixpkgs/nixos-24.05").legacyPackages.${system}
+    else
+      import <nixpkgs> { };
   context = import ./context.nix;
-  contextJson = pkgs.writeText "context.json" (builtins.toJSON context);
+  contextJson = resolvedPkgs.writeText "context.json" (builtins.toJSON context);
 in
-pkgs.stdenv.mkDerivation {
+resolvedPkgs.stdenv.mkDerivation {
   name = "www-benix-be";
   src = ./.;
 
   buildInputs = [
-    pkgs.python3
-    pkgs.python3Packages.django
-    pkgs.python3Packages.ics
+    resolvedPkgs.python3
+    resolvedPkgs.python3Packages.django
+    resolvedPkgs.python3Packages.ics
   ];
 
   installPhase = ''
