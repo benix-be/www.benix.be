@@ -18,6 +18,7 @@
       program = "Presentations, drinks, and open discussions.";
       food = "Pizza";
       discussion = "https://discourse.nixos.org/t/nix-meetup-nivelles-belgium-2025-11-7/71431";
+      registration = "https://pretix.eu/benix/2025-11-07/";
     }
     {
       date = "Friday December 5th, 2025";

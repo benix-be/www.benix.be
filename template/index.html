@@ -113,8 +113,11 @@
               </div>
               {% endif %}
             </div>
-            {% if meetup.discussion or meetup.venue.url or meetup.venue.geolocation %}
+            {% if meetup.registration or meetup.discussion or meetup.venue.url or meetup.venue.geolocation %}
             <div class="meetup-actions">
+              {% if meetup.registration %}
+              <a class="btn register-btn" href="{{ meetup.registration }}" target="_blank" rel="noopener">Register</a>
+              {% endif %}
               {% if meetup.venue and meetup.venue.url %}
               <a class="meetup-action" href="{{ meetup.venue.url }}" target="_blank" rel="noopener">Venue website</a>
               {% endif %}

@@ -507,6 +507,17 @@ header.site {
   background: rgba(0, 0, 0, 0.16);
 }
 
+.meetup-actions .register-btn {
+  border-color: rgba(226, 8, 140, 0.5);
+  box-shadow: none;
+}
+
+.meetup-actions .register-btn:hover,
+.meetup-actions .register-btn:focus-visible {
+  background: rgba(226, 8, 140, 0.92);
+  border-color: rgba(226, 8, 140, 0.7);
+}
+
 .meetup-action {
   display: inline-flex;
   align-items: center;
