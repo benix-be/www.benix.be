@@ -12,7 +12,18 @@
   --muted: var(--color-light-gray);
   --accent: var(--color-pink);
   --accent-2: var(--color-green);
-  --bg-gradient: radial-gradient(120% 110% at 14% 4%, rgba(0, 203, 157, 0.35), transparent 52%), radial-gradient(140% 110% at 82% 2%, rgba(226, 8, 140, 0.28), transparent 58%), var(--bg);
+  --bg-gradient:
+    radial-gradient(
+      120% 110% at 14% 4%,
+      rgba(0, 203, 157, 0.35),
+      transparent 52%
+    ),
+    radial-gradient(
+      140% 110% at 82% 2%,
+      rgba(226, 8, 140, 0.28),
+      transparent 58%
+    ),
+    var(--bg);
 
   --card: rgba(255, 255, 255, 0.06);
   --card-brd: rgba(255, 255, 255, 0.14);
@@ -30,10 +41,12 @@
 }
 
 @font-face {
-  font-family: 'Graviola Soft';
+  font-family: "Graviola Soft";
   font-style: normal;
   font-weight: 400;
-  src: local('Graviola Soft'), url(/static/graviolasoft-medium.otf) format('opentype');
+  src:
+    local("Graviola Soft"),
+    url(/static/graviolasoft-medium.otf) format("opentype");
   font-display: swap;
 }
 
@@ -43,14 +56,24 @@ html {
   scroll-behavior: smooth;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
   color: var(--text);
-  font-family: 'Graviola Soft', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    "Graviola Soft",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
   line-height: 1.55;
   min-height: 100vh;
   display: flex;
@@ -78,11 +101,13 @@ img {
 }
 
 code {
-  font-family: ui-monospace, SFMono-Regular, SFMono, Menlo, Monaco, Consolas, 'Liberation Mono', monospace;
+  font-family:
+    ui-monospace, SFMono-Regular, SFMono, Menlo, Monaco, Consolas,
+    "Liberation Mono", monospace;
   background: rgba(0, 0, 0, 0.28);
   padding: 2px 6px;
   border-radius: 6px;
-  font-size: .85rem;
+  font-size: 0.85rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--color-white);
 }
@@ -116,8 +141,12 @@ main {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(120% 120% at 0% 50%, rgba(0, 203, 157, 0.2), transparent 60%);
-  opacity: .4;
+  background: radial-gradient(
+    120% 120% at 0% 50%,
+    rgba(0, 203, 157, 0.2),
+    transparent 60%
+  );
+  opacity: 0.4;
   pointer-events: none;
 }
 
@@ -132,7 +161,7 @@ main {
   margin-top: 6px;
   font-size: 1rem;
   color: var(--muted);
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
 }
 
 .panel-heading {
@@ -194,7 +223,10 @@ header.site {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, var(--accent), transparent 55%), radial-gradient(circle at 70% 70%, var(--accent-2), transparent 55%), rgba(255, 255, 255, 0.15);
+  background:
+    radial-gradient(circle at 35% 30%, var(--accent), transparent 55%),
+    radial-gradient(circle at 70% 70%, var(--accent-2), transparent 55%),
+    rgba(255, 255, 255, 0.15);
   border: 1px solid var(--card-brd);
   box-shadow: var(--shadow-2);
 }
@@ -202,7 +234,7 @@ header.site {
 .brand span {
   font-size: 1.15rem;
   font-weight: 700;
-  letter-spacing: .3px;
+  letter-spacing: 0.3px;
   color: var(--text);
 }
 
@@ -216,7 +248,7 @@ header.site {
 
 .nav a {
   color: var(--text);
-  opacity: .9;
+  opacity: 0.9;
 }
 
 .nav a:hover {
@@ -234,13 +266,21 @@ header.site {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(120% 100% at -5% 20%, rgba(255, 255, 255, 0.12), transparent 60%);
-  opacity: .6;
+  background: radial-gradient(
+    120% 100% at -5% 20%,
+    rgba(255, 255, 255, 0.12),
+    transparent 60%
+  );
+  opacity: 0.6;
   pointer-events: none;
 }
 
 .hero-card {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.03)
+  );
   border: 1px solid var(--card-brd);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-1);
@@ -256,15 +296,19 @@ header.site {
   bottom: -60px;
   width: clamp(160px, 30vw, 260px);
   aspect-ratio: 1;
-  background: radial-gradient(circle at center, rgba(226, 8, 140, 0.45), rgba(226, 8, 140, 0));
-  opacity: .35;
+  background: radial-gradient(
+    circle at center,
+    rgba(226, 8, 140, 0.45),
+    rgba(226, 8, 140, 0)
+  );
+  opacity: 0.35;
   pointer-events: none;
 }
 
 .hero-eyebrow {
   margin: 0 0 10px;
-  font-size: .85rem;
-  letter-spacing: .2em;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -272,7 +316,7 @@ header.site {
 .hero h1 {
   margin: 0 0 6px;
   font-size: clamp(28px, 4.4vw, 44px);
-  letter-spacing: .4px;
+  letter-spacing: 0.4px;
   color: var(--accent);
 }
 
@@ -302,7 +346,11 @@ header.site {
   color: var(--color-white);
   text-decoration: none;
   box-shadow: var(--shadow-2);
-  transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .btn.secondary {
@@ -359,7 +407,10 @@ header.site {
   flex-direction: column;
   box-shadow: var(--shadow-2);
   backdrop-filter: saturate(140%) blur(12px);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .meetup-card::before {
@@ -368,7 +419,7 @@ header.site {
   inset: 0 0 auto 0;
   height: 4px;
   background: linear-gradient(90deg, var(--accent-2), var(--accent));
-  opacity: .85;
+  opacity: 0.85;
 }
 
 .meetup-card:hover {
@@ -392,8 +443,8 @@ header.site {
 
 .meetup-card-kicker {
   text-transform: uppercase;
-  letter-spacing: .16em;
-  font-size: .7rem;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
@@ -405,8 +456,8 @@ header.site {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: rgba(255, 255, 255, 0.08);
-  font-size: .7rem;
-  letter-spacing: .12em;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.75);
 }
@@ -433,7 +484,7 @@ header.site {
   margin: 0;
   color: rgba(255, 255, 255, 0.8);
   font-size: 1rem;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
 }
 
 .meetup-card-body {
@@ -466,14 +517,14 @@ header.site {
 .meta-item dt {
   margin: 0 0 6px;
   text-transform: uppercase;
-  letter-spacing: .16em;
-  font-size: .7rem;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.6);
 }
 
 .meta-item dd {
   margin: 0;
-  font-size: .96rem;
+  font-size: 0.96rem;
   color: rgba(255, 255, 255, 0.92);
 }
 
@@ -489,8 +540,8 @@ header.site {
   display: block;
   margin-bottom: 6px;
   text-transform: uppercase;
-  letter-spacing: .16em;
-  font-size: .7rem;
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
   color: rgba(255, 255, 255, 0.6);
 }
 
@@ -527,11 +578,14 @@ header.site {
   border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.1);
   color: var(--color-white);
-  font-size: .86rem;
+  font-size: 0.86rem;
   font-weight: 600;
-  letter-spacing: .02em;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .meetup-action:hover,
@@ -661,8 +715,8 @@ header.site {
   padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid var(--card-brd);
-  background: rgba(226, 8, 140, .14);
-  font-size: .92rem;
+  background: rgba(226, 8, 140, 0.14);
+  font-size: 0.92rem;
   color: var(--text);
 }
 
@@ -711,12 +765,12 @@ header.site {
   content: "";
   position: absolute;
   left: -2px;
-  top: .4em;
+  top: 0.4em;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 3px rgba(226, 8, 140, .25);
+  box-shadow: 0 0 0 3px rgba(226, 8, 140, 0.25);
 }
 
 .tl-item a {
@@ -729,7 +783,7 @@ footer {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.18), rgba(0, 0, 0, 0.28));
   padding: 22px 0 34px;
   color: var(--muted);
-  font-size: .95rem;
+  font-size: 0.95rem;
 }
 
 footer a {
@@ -764,12 +818,12 @@ footer a:focus-visible {
 }
 
 .foot-card p {
-  margin: .35rem 0 0;
+  margin: 0.35rem 0 0;
   color: rgba(255, 255, 255, 0.82);
 }
 
 .foot-card p + p {
-  margin-top: .25rem;
+  margin-top: 0.25rem;
 }
 
 .top {
