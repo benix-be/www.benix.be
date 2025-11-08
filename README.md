@@ -7,6 +7,7 @@ This website is build with Nix and Django templates.
 Build with: `nix-build`, the build output is in `result/`.
 
 Automatically rebuilds on changes with:
+
 ```shell
 nix-shell --run "python watch.py"
 ```
