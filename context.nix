@@ -2,6 +2,9 @@
   matrix_room = "#brunix:matrix.org";
 
   next_meetups = [
+  ];
+
+  last_meetups = [
     {
       date = "Friday November 7th, 2025";
       time = "18:00";
@@ -19,14 +22,6 @@
       food = "Pizza";
       discussion = "https://discourse.nixos.org/t/nix-meetup-nivelles-belgium-2025-11-7/71431";
       registration = "https://pretix.eu/benix/2025-11-07/";
-    }
-    {
-      date = "Friday December 5th, 2025";
-      time = "18:00";
-      end_time = "22:00";
-      city = "Brussels city centre";
-      program = "Dinner, presentations, and open discussions.";
-      food = null;
     }
   ];
 

@@ -138,6 +138,92 @@
         {% else %}
         <p class="lead">We are lining up the next meetup dates. Join the Matrix group to stay informed.</p>
         {% endif %}
+      </div>
+    </section>
+
+    <!-- ===== LAST MEETUPS ===== -->
+    <section id="last" class="section last-meetups section-alt">
+      <div class="container">
+        <div class="section-heading">
+          <h2>Last meetups</h2>
+          <p class="lead">A quick look back at the most recent sessions.</p>
+        </div>
+
+        {% if last_meetups %}
+        <div class="next-grid">
+          {% for meetup in last_meetups %}
+          <article class="meetup-card{% if forloop.first %} is-featured{% endif %}">
+            <header class="meetup-card-header">
+              <div class="meetup-card-top">
+                <span class="meetup-card-kicker">{% if forloop.first %}Last meetup{% else %}Recent meetup{% endif %}</span>
+                <span class="meetup-card-status is-confirmed">Completed</span>
+              </div>
+              <h3 class="meetup-city">{{ meetup.city }}</h3>
+              <p class="meetup-date">{{ meetup.date }}</p>
+            </header>
+            <div class="meetup-card-body">
+              <dl class="meetup-meta">
+                <div class="meta-item{% if not meetup.time and not meetup.end_time %} is-pending{% endif %}">
+                  <dt>Time</dt>
+                  <dd>
+                    {% if meetup.time and meetup.end_time %}
+                    {{ meetup.time }}&nbsp;–&nbsp;{{ meetup.end_time }}
+                    {% elif meetup.time %}
+                    Started at {{ meetup.time }}
+                    {% elif meetup.end_time %}
+                    Wrapped up by {{ meetup.end_time }}
+                    {% else %}
+                    Not recorded
+                    {% endif %}
+                  </dd>
+                </div>
+                <div class="meta-item{% if not meetup.venue or not meetup.venue.address %} is-pending{% endif %}">
+                  <dt>Venue</dt>
+                  <dd>
+                    {% if meetup.venue and meetup.venue.address %}
+                    {{ meetup.venue.address }}
+                    {% else %}
+                    Not recorded
+                    {% endif %}
+                  </dd>
+                </div>
+                {% if meetup.food %}
+                <div class="meta-item">
+                  <dt>Food</dt>
+                  <dd>{{ meetup.food }}</dd>
+                </div>
+                {% endif %}
+              </dl>
+              {% if meetup.program %}
+              <div class="meetup-note">
+                <span>Program</span>
+                <p>{{ meetup.program }}</p>
+              </div>
+              {% endif %}
+            </div>
+            {% if meetup.discussion or meetup.venue and meetup.venue.url or meetup.venue and meetup.venue.geolocation %}
+            <div class="meetup-actions">
+              {% if meetup.venue and meetup.venue.url %}
+              <a class="meetup-action" href="{{ meetup.venue.url }}" target="_blank" rel="noopener">Venue website</a>
+              {% endif %}
+              {% if meetup.venue and meetup.venue.geolocation %}
+              <a class="meetup-action"
+                href="https://www.openstreetmap.org/?mlat={{ meetup.venue.geolocation.latitude }}&mlon={{ meetup.venue.geolocation.longitude }}#map=18/{{ meetup.venue.geolocation.latitude }}/{{ meetup.venue.geolocation.longitude }}"
+                target="_blank" rel="noopener">View on map</a>
+              {% endif %}
+              {% if meetup.discussion %}
+              <a class="meetup-action" href="{{ meetup.discussion }}" target="_blank" rel="noopener">Community
+                discussion</a>
+              {% endif %}
+            </div>
+            {% endif %}
+          </article>
+          {% endfor %}
+        </div>
+        {% else %}
+        <p class="lead">Recap coming soon.</p>
+        {% endif %}
+      </div>
     </section>
 
     <!-- ===== SUMMARY CARDS ===== -->
