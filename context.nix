@@ -2,6 +2,22 @@
   matrix_room = "#brunix:matrix.org";
 
   next_meetups = [
+    {
+      date = "Wednesday November 18th, 2026";
+      time = "18:00";
+      end_time = "20:00";
+      city = "Brussels";
+      venue = {
+        address = "HSBXL, Hackerspace Brussels, Rue Osseghem 53, 1080 Molenbeek, Brussels, Belgium";
+        url = "https://hsbxl.be/enter/";
+        geolocation = {
+          latitude = 50.8556539;
+          longitude = 4.3210072;
+        };
+      };
+      program = "Open discussions and hacking on Nix and Guix.";
+      discussion = "https://hsbxl.be/events/brunix/15/";
+    }
   ];
 
   last_meetups = [
