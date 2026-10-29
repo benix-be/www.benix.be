@@ -36,7 +36,7 @@
       number = 9;
       venue_name = "HSBXL";
       venue_url = "https://hsbxl.be/";
-      date = "January 17th, 2024";
+      date = "January 17th, 2025";
     }
     {
       number = 8;
